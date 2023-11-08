@@ -1,30 +1,23 @@
-import time
+import tkinter as tk
 
-# États des buzzers
-BUZZER1_ACTIVATED = False
-BUZZER2_ACTIVATED = False
+# Fonction appelée lorsqu'un bouton est cliqué
+def bouton_clique(num_bouton):
+    texte.config(text=f'Bouton {num_bouton} cliqué en premier!')
 
-# États des LEDs
-LED1_ON = False
-LED2_ON = False
+# Création de la fenêtre principale
+fenetre = tk.Tk()
+fenetre.title("Bouton Cliqué en Premier")
 
-# Fonction pour changer la couleur des LEDs
-def change_color():
-    global LED1_ON, LED2_ON
-    LED1_ON, LED2_ON = not LED1_ON, not LED2_ON
-    print("Changement de couleur des LEDs.")
+# Création des boutons
+bouton1 = tk.Button(fenetre, text="Bouton 1", command=lambda: bouton_clique(1))
+bouton1.pack(pady=20)
 
-try:
-    print("Attente d'une activation des buzzers...")
-    while True:
-        # Simulation de l'activation des buzzers (remplacez cela par votre logique d'activation)
-        BUZZER1_ACTIVATED = input("Buzzer 1 activé ? (oui/non) ").lower() == 'oui'
-        BUZZER2_ACTIVATED = input("Buzzer 2 activé ? (oui/non) ").lower() == 'oui'
+bouton2 = tk.Button(fenetre, text="Bouton 2", command=lambda: bouton_clique(2))
+bouton2.pack(pady=20)
 
-        # Vérification des buzzers et changement de couleur des LEDs
-        if BUZZER1_ACTIVATED or BUZZER2_ACTIVATED:
-            change_color()
-        time.sleep(1)  # Attente d'une seconde avant de vérifier à nouveau les buzzers
+# Création du texte pour afficher le résultat
+texte = tk.Label(fenetre, text="")
+texte.pack()
 
-except KeyboardInterrupt:
-    print("Arrêt du programme.")
+# Lancement de la boucle principale
+fenetre.mainloop()
